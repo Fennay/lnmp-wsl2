@@ -96,3 +96,20 @@ cd /webser/src/$php
 --enable-bcmath \
 --without-sqlite3
 make && make install
+
+## 添加到环境变量
+export $PATH:/webser/php74/bin/php >> ~/.bashrc
+
+## 安装composer
+/webser/php74/bin/php -r "copy('https://install.phpcomposer.com/installer', 'composer-setu
+p.php');"
+/webser/php74/bin/php composer-setup.php
+/webser/php74/bin/php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+
+
+## nginx PHP 绑定
+touch /dev/shm/fpm-cgi.sock
+chown www-data:www-data /dev/shm/fpm-cgi.sock
+chmod 666 /dev/shm/fpm-cgi.sock
+
